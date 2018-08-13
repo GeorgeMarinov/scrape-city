@@ -1,0 +1,52 @@
+﻿@using ScrapeCity.Common.Models.Brands.ViewModels
+@model IEnumerable<BrandVm>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/bootstrap-confirmation.js")
+    @*used by bootstrap-confirmation.js -> confirmation popups*@
+    <script>
+        $('[data-toggle="confirmation"]').confirmation();
+    </script>
+}
+
+<div class="container-fluid">
+    <a id="addBrandButton" href="~/Brand/Add" class="btn btn-lg btn-dark rounded-0 mt-3">Add a brand</a>
+    <div class="row justify-content-center">
+        <div class="col-3">
+            <table class="table table-striped">
+                <tbody>
+                    @foreach (var brand in Model)
+                    {
+                        <tr>
+                            <td>
+                                @brand.BrandName
+                            </td>
+                            <td>
+                                <a name="editBrandButton"
+                                   href="~/Brand/Edit/@brand.Id"
+                                   class="btn btn-sm btn-secondary rounded-0">
+                                    Edit
+                                </a>
+                            </td>
+                            @if (brand.CanBeDeleted == true)
+                            {
+                                <td>
+                                    <a name="deleteBrandButton"
+                                       href="/Brand/Delete/@brand.Id"
+                                       data-toggle="confirmation"
+                                       data-title="Delete brand ?"
+                                       data-btn-ok-label="Delete"
+                                       data-btn-ok-class="btn btn-sm btn-secondary rounded-0"
+                                       data-btn-cancel-class="btn btn-sm btn-light rounded-0"
+                                       class="btn btn-sm btn-secondary rounded-0">
+                                        Delete
+                                    </a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

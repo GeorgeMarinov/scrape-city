@@ -1,0 +1,120 @@
+﻿@model ScrapeCity.Common.Models.Monitors.MonitorProperties.ViewModels.PublicWebsiteIndexSliderValues
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+    <link href="~/Content/monitorsInstantSearch.css" rel="stylesheet" />
+    <link href="~/Content/BadgeTooltip.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/2.4.1/instantsearch.js"></script>
+    <script>
+     let viewData = @Html.Raw(Json.Encode(Model));
+    </script>
+    <script src="~/Scripts/search.js"></script>
+    <script src="~/Scripts/MonitorHelpSurvey.js"></script>
+}
+@*<section id="resultsTopbar" class="col-3">
+        <div class="sort-by">
+            <label>Sort by</label>
+            <div id="sortBySelector"></div>
+        </div>
+
+    </section>*@
+@*<div id="stats" class="text-muted col-3">
+
+    </div>*@
+@*<section class="facet-wrapper">
+        <div class="facet-category-title">Refine by</div>
+        <div id="materials" class="facet"></div>
+        <div id="colors" class="facet"></div>
+        <div id="rating" class="facet"></div>
+        <div id="prices" class="facet"></div>
+    </section>*@
+
+
+
+
+
+
+
+
+<div class="row">
+    <div id="filters" class="col-3 p-5">
+        <h1 class="pb-2" >FILTERS</h1>
+        <hr />
+        <section class="facet-wrapper p-1 m-1">
+            <div class="facet-category-title facet">ACTIVE FILTERS:</div>
+            <div id="currentRefinedValues"></div>
+        </section>
+        <hr />
+        <div class="p-1" id="brandRefinementList"></div>
+        <hr />
+        <div class="p-1" id="screenSizeSlider"></div>
+        <hr />
+        <div class="p-1" id="panelTypeRefinementList"></div>
+        <hr />
+        <div class="p-1" id="backlightTypeRefinementList"></div>
+        <hr />
+        <div class="p-1" id="horizontalResolutionRefinementList"></div>
+        <hr />
+        <div class="p-1" id="verticalResolutionRefinementList"></div>
+        <hr />
+        <div class="p-1" id="horizontalViewingAngleRefinementList"></div>
+        <hr />
+        <div class="p-1" id="verticalViewingAngleRefinementList"></div>
+        <hr />
+        <div class="p-1" id="brightnessRefinementList"></div>
+        <hr />
+        <div class="p-1" id="responseTimeRefinementList"></div>
+        <hr />
+        <div class="p-1" id="refreshRateRefinementList"></div>
+        <hr />
+        <div class="p-1" id="staticContrastRefinementList"></div>
+        <hr />
+        <div class="p-1" id="dynamicContrastRefinementList"></div>
+    </div>
+    <div id="results" class="col-9 p-5">
+        <div class="d-flex">
+            <h1>MONITORS</h1>
+            <div></div>
+            <div class="input-group">
+                <div class="input-group-prepend ml-auto">
+                    <span class="input-group-text rounded-0"><i class="fa fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control rounded-0" id="searchBox" />
+            </div>
+        </div>
+        <hr />
+        <main id="hits"></main>
+
+        @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#survey">Need some help ?</button>*@
+        @*<div id="survey" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div id="surveyContent" class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div id="surveyPage1">
+                                <button class="btn" onclick="MonitorHelpSurvey.Begin()">Begin!</button>
+                            </div>
+                        </div>
+                        <div style="display:none" class="modal-footer">
+                            <a id="surveyPrevPageButton"
+                               aria-label="next page"
+                               onclick="MonitorHelpSurvey.PrevPage()">
+                                <span class="glyphicon glyphicon-chevron-left">
+                                </span>
+                            </a>
+                            <span id="surveyPagination"></span>
+                            <a id="surveyNextPageButton"
+                               aria-label="next page"
+                               onclick="MonitorHelpSurvey.NextPage()">
+                                <span class="glyphicon glyphicon-chevron-right">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+
+</div>

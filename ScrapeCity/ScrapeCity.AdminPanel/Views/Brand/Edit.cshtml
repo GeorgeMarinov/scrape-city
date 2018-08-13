@@ -1,0 +1,33 @@
+﻿@model ScrapeCity.Common.Models.Brands.ViewModels.BrandVm
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<div class="container-fluid">
+    <h1 class="text-center mt-3">Edit a Brand</h1>
+    <div class="row justify-content-center">
+        <div class="col-3">
+            @using (Html.BeginForm("Edit", "Brand", FormMethod.Post))
+            {
+                Html.EnableClientValidation();
+                Html.EnableUnobtrusiveJavaScript(true);
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(model => model.Id);
+
+                <div class="form-group ">
+                    @Html.LabelFor(model => model.BrandName, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.BrandName, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                    @Html.ValidationMessageFor(model => model.BrandName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input id="editBrandButton" type="submit" value="Edit" class="btn btn-light rounded-0" />
+                    <a href="~/Brand/Index" class="btn btn-dark rounded-0">Back</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

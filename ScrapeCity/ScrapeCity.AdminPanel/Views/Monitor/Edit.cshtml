@@ -1,0 +1,167 @@
+﻿@model ScrapeCity.Common.Models.Monitors.ViewModels.MonitorVm
+
+
+@section Styles {
+    <link href="@Url.Content("~/Content/Dropzone.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Dropzone.basic.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/FullScreenImage.css")" rel="stylesheet" type="text/css" />
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/MonitorPorts.js")
+    @Scripts.Render("~/Scripts/dropzone.js")
+    @Scripts.Render("~/Scripts/UploadImageLink.js")
+    @Scripts.Render("~/Scripts/bootstrap-confirmation.js")
+    @Scripts.Render("~/Scripts/FullScreenImage.js")
+    @Scripts.Render("~/Scripts/template7.min.js")
+    @Scripts.Render("~/Scripts/AddInputFieldStringArray.js")
+
+    @*used by bootstrap-confirmation.js -> confirmation popups*@
+    <script>
+        $('[data-toggle="confirmation"]').confirmation();
+    </script>
+
+    @*template used by MonitorPorts.js -> adds more video input fields*@
+    <script id="videoPort-data" type="text/template">
+        @foreach (var port in Model.ViewData.VideoPorts)
+        {
+            <br />@port
+        }
+    </script>
+
+    @*template used by MonitorPorts.js -> adds more usb input fields*@
+    <script id="usbPort-data" type="text/template">
+        @foreach (var port in Model.ViewData.USBPorts)
+        {
+            <br />@port
+        }
+    </script>
+
+    @*used by VideoPorts.js, USBPorts.js and UploadImageLink.js -> adjusts global integer based on number of ports the edited model is holding and adds a upload image field*@
+    <script>
+        $(document).ready(function () {
+            MonitorPortsJs.setGlobalVideoPortInt(@Model.VideoPorts.Count());
+            MonitorPortsJs.setGlobalUSBPortInt(@Model.USBPorts.Count());
+            UploadImageLinkJs.AddUploadInputField();
+            @if (Model.VideoPorts.Count > 0)
+            {
+                <text>MonitorPortsJs.updateOptions("video")</text>
+            }
+            @if (Model.USBPorts.Count > 0)
+            {
+                <text>MonitorPortsJs.updateOptions("usb")</text>
+            }
+        });
+    </script>
+
+    @*used by dropzone.js -> provides options*@
+    <script type="text/javascript">
+
+        Dropzone.options.dropzoneJsForm = {
+
+            //prevents Dropzone from uploading dropped files immediately
+            autoProcessQueue: false,
+            //adds cancel image upload links
+            addRemoveLinks: true,
+            init: function () {
+                //refresh page after upload complete
+                this.on('success', function () {
+                    if (this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0) {
+                        location.reload();
+                    }
+                });
+                //set submit button
+                var submitButton = document.querySelector("#upload-images");
+                var myDropzone = this; //closure
+
+                submitButton.addEventListener("click", function () {
+
+                    //tell Dropzone to process all queued files
+                    myDropzone.processQueue();
+                });
+
+            }
+        };
+
+    </script>
+}
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-2">
+            @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "control-label " })
+            <img id="thumbnail"
+                 class="img-fluid"
+                 width="125"
+                 height="100"
+                 src="@Url.Content(Model.Thumbnail)" />
+        </div>
+        <div class="col-10">
+            @Html.LabelFor(model => model.MonitorPictures, htmlAttributes: new { @class = "control-label " })
+            <div class="jumbotron rounded-0">
+                <article id="monitorImages">
+                    @foreach (var picture in Model.MonitorPictures)
+                    {
+                        <img class="img-thumbnail"
+                             width="150"
+                             height="150"
+                             src="@Url.Content(@picture.Uri)?width=150&height=150"
+                             data-image-id="@picture.Id"
+                             data-monitor-id="@Model.Id"
+                             onclick="FullScreenImage.ShowFullScreenImage(this)" />
+                    }
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label class="control-label">Upload images</label>
+            <div class="jumbotron rounded-0">
+                <div>
+                    <button class="btn btn-secondary rounded-0" id="upload-images">Upload</button>
+                </div>
+                <br />
+                <form action="~/Monitor/UploadImage" class="dropzone" id="dropzoneJsForm">
+                    <input type="hidden" id="monitorId" name="monitorId" value="@Model.Id" />
+                </form>
+            </div>
+        </div>
+        <div class="col-6">
+            <label class="control-label">Upload images via link</label>
+            <div class="jumbotron rounded-0">
+                <input type="hidden" id="monitorId" name="monitorId" value="@Model.Id" />
+                <button id="uploadImageLinks" class="btn btn-secondary rounded-0" onclick="UploadImageLinkJs.UploadInputFields()">Upload</button>
+                <button id="addUploadImageLink" class="btn btn-secondary rounded-0" onclick="UploadImageLinkJs.AddUploadInputField()">Add link field</button>
+                <button id="resetUploadImageFields" class="btn btn-secondary rounded-0" onclick="UploadImageLinkJs.ResetUploadInputFields()">Remove fields</button>
+                <div id="UploadImageLinksNotifications">
+                </div>
+                <div id="UploadImageFieldContainer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm("Edit", "Monitor", FormMethod.Post, new { id = "monitorForm" }))
+        {
+            Html.RenderPartial("MonitorAddEditForm", Model);
+
+            <div class="offset-3 mt-3">
+                <div class="form-group">
+                    <input id="submit" type="submit" value="Edit" class="btn btn-light btn-lg rounded-0" />
+                    <a href="~/Monitor/Index" class="btn btn-secondary btn-lg rounded-0">Back</a>
+                    <a id="deleteMonitorButton"
+                       href="~/Monitor/Delete/@Model.Id"
+                       data-toggle="confirmation"
+                       data-title="Delete monitor ?"
+                       data-btn-ok-label="Delete"
+                       data-btn-ok-class="btn btn-sm btn-secondary rounded-0"
+                       data-btn-cancel-class="btn btn-sm btn-light rounded-0"
+                       class="btn btn-dark btn-lg rounded-0">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,1274 @@
+﻿@model ScrapeCity.Common.Models.Monitors.ViewModels.MonitorVm
+
+@{Html.EnableClientValidation(); }
+@{Html.EnableUnobtrusiveJavaScript(true); }
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+@Html.HiddenFor(model => model.Id)
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex flex-row">
+            <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" role="navigation">
+                <li class="nav-item">
+                    <a href="#Brand, model" class="nav-link active rounded-0" data-toggle="tab" role="tab" aria-controls="Brand, model">Brand, model</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Display" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Display">Display</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Frequencies" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Frequencies">Frequencies</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Power consumption" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Power consumption">Power consumption</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Dimensions, weight and color" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Dimensions, weight and color">Dimensions, weight and color</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Ergonomics" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Ergonomics">Ergonomics</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Audio" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Audio">Audio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Camera" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Camera">Camera</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Connectivity" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Connectivity">Connectivity</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Features" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Features">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#Certificates, standarts and licenses" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Certificates, standarts and licenses">Certificates, standarts and licenses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#UnhandledDisplaySpecificationProperties" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="UnhandledDisplaySpecificationProperties">UnhandledDisplaySpecificationProperties</a>
+                </li>
+            </ul>
+            <div class="tab-content col-6">
+                <div class="tab-pane fade show active" id="Brand, model" role="tabpanel">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DisplaySpecId)
+                        @Html.EditorFor(model => model.DisplaySpecId, new { htmlAttributes = new { @class = "form-control rounded-0", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model.DisplaySpecId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BrandName)
+                        <select class="select form-control rounded-0 rounded-0" name="BrandId">
+                            @foreach (var brand in Model.ViewData.Brands)
+                            {
+                                if (brand.Id == Model.BrandId)
+                                {
+                                    <option selected value="@brand.Id">
+                                        @brand.BrandName
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@brand.Id">
+                                        @brand.BrandName
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Model)
+                        @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Display" role="tabpanel">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ScreenSize, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.ScreenSize, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">in</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ScreenSize, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ScreenDiagonal, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.ScreenDiagonal, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ScreenDiagonal, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ScreenWidth, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.ScreenWidth, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ScreenWidth, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ScreenHeight, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.ScreenHeight, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ScreenHeight, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.HasCurvedPanel, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.HasCurvedPanel, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.HasCurvedPanel, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RadiusOfCurvature, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.RadiusOfCurvature, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.RadiusOfCurvature, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.PanelType, htmlAttributes: new { @class = "control-label " })
+
+                        <select class="select form-control rounded-0" id="PanelType" name="PanelType">
+                            @foreach (var panel in Model.ViewData.PanelTypes)
+                            {
+                                if (panel == Model.PanelType)
+                                {
+                                    <option selected value="@panel">
+                                        @panel
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@panel">
+                                        @panel
+                                    </option>
+                                }
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.PanelType, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PanelBitDepth, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.PanelBitDepth, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">bits</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PanelBitDepth, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.FRC, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.FRC, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.FRC, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LUT, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.LUT, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">bits</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.LUT, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ColorDepth, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.ColorDepth, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">bits</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ColorDepth, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AspectRatio, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.AspectRatio, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">:1</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.AspectRatio, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.AspectRatioCommon, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.AspectRatioCommon, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.AspectRatioCommon, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.MaxHorizontalPixels, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.MaxHorizontalPixels, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">pixels</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.MaxHorizontalPixels, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.MaxVerticalPixels, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.MaxVerticalPixels, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">pixels</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.MaxVerticalPixels, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.PixelPitch, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.PixelPitch, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PixelPitch, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.PPI, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.PPI, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.PPI, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.DisplayArea, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.DisplayArea, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DisplayArea, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.BacklightType, htmlAttributes: new { @class = "control-label " })
+
+                        <select class="select form-control rounded-0" id="BacklightType" name="BacklightType">
+                            @foreach (var backlight in Model.ViewData.Backlights)
+                            {
+                                if (backlight == Model.BacklightType)
+                                {
+                                    <option selected value="@backlight">
+                                        @backlight
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@backlight">
+                                        @backlight
+                                    </option>
+                                }
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.BacklightType, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.NTSC, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.NTSC, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.NTSC, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.sRGB, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.sRGB, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.sRGB, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.AdobeRGB, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.AdobeRGB, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.AdobeRGB, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.DCI_P3, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.DCI_P3, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DCI_P3, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.Rec2020, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Rec2020, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Rec2020, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Brightness, htmlAttributes: new { @class = "control-label ", value = "" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Brightness, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">cd/㎡</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Brightness, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PeakBrightness, htmlAttributes: new { @class = "control-label ", value = "" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.PeakBrightness, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">cd/㎡</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PeakBrightness, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StaticContrast, htmlAttributes: new { @class = "control-label ", value = "" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.StaticContrast, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">:1</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.StaticContrast, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DynamicContrast, htmlAttributes: new { @class = "control-label ", value = "" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.DynamicContrast, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">:1</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DynamicContrast, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.HDR, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.HDR, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.HDR, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.HorizontalViewingAngle, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.HorizontalViewingAngle, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">&deg;</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.HorizontalViewingAngle, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.VerticalViewingAngle, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.VerticalViewingAngle, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">&deg;</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.VerticalViewingAngle, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.MinimumResponceTime, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.MinimumResponceTime, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">ms</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.MinimumResponceTime, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.AverageResponceTime, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.AverageResponceTime, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">ms</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.AverageResponceTime, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.MaximumResponceTime, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.MaximumResponceTime, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">ms</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.MaximumResponceTime, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.InputLag, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.InputLag, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">ms</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.InputLag, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.ScreenType, htmlAttributes: new { @class = "control-label " })
+
+                        <select class="select form-control rounded-0" id="ScreenType" name="ScreenType">
+                            @foreach (var screen in Model.ViewData.ScreenTypes)
+                            {
+                                if (screen == Model.ScreenType)
+                                {
+                                    <option selected value="@screen">
+                                        @screen
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@screen">
+                                        @screen
+                                    </option>
+                                }
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.ScreenType, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.DisplaySyncType, htmlAttributes: new { @class = "control-label " })
+                        <select class="select form-control rounded-0" id="DisplaySyncType" name="DisplaySyncType">
+                            @foreach (var dst in Model.ViewData.DisplaySyncTypes)
+                            {
+                                if (dst == Model.DisplaySyncType)
+                                {
+                                    <option selected value="@dst">
+                                        @dst
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@dst">
+                                        @dst
+                                    </option>
+                                }
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.DisplaySyncType, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.CIE1976, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.CIE1976, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.CIE1976, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.CIE1931, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.CIE1931, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.CIE1931, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.REC709, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.REC709, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.REC709, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.ThreeD, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.ThreeD, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.ThreeD, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Frequencies" role="tabpanel">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MinHorizontalFrequency, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.MinHorizontalFrequency, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">kHz</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.MinHorizontalFrequency, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MaxHorizontalFrequency, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.MaxHorizontalFrequency, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">kHz</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.MaxHorizontalFrequency, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.VerticalFrequency, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.VerticalFrequency, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">Hz</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.VerticalFrequency, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Minimum110V, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Minimum110V, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">V</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Minimum110V, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Maximum110V, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Maximum110V, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">V</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Maximum110V, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Minimum220V, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Minimum220V, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">V</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Minimum220V, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Maximum220V, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Maximum220V, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">V</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Maximum220V, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AlternatingCurrentFrequencyMin, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.AlternatingCurrentFrequencyMin, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">Hz</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.AlternatingCurrentFrequencyMin, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AlternatingCurrentFrequencyMax, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.AlternatingCurrentFrequencyMax, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">Hz</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.AlternatingCurrentFrequencyMax, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Power consumption" role="tabpanel">
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.PowerConsumptionOff, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.PowerConsumptionOff, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">W</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PowerConsumptionOff, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.PowerConsumptionSleep, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.PowerConsumptionSleep, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">W</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PowerConsumptionSleep, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.PowerConsumptionAverage, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.PowerConsumptionAverage, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">W</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PowerConsumptionAverage, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.PowerConsumptionEco, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.PowerConsumptionEco, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">W</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PowerConsumptionEco, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.PowerConsumptionMaximum, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.PowerConsumptionMaximum, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">W</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PowerConsumptionMaximum, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.Amperage, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Amperage, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">A</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Amperage, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.EnergyEfficiencyClass, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.EnergyEfficiencyClass, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.EnergyEfficiencyClass, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Dimensions, weight and color" role="tabpanel">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Width, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Width, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Width, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Depth, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Depth, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Depth, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">kg</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WidthWithStand, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.WidthWithStand, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.WidthWithStand, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HeightWithStand, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.HeightWithStand, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.HeightWithStand, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DepthWithStand, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.DepthWithStand, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DepthWithStand, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WeightWithStand, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.WeightWithStand, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">kg</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.WeightWithStand, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PanelColors, htmlAttributes: new { @class = "control-label " })
+                        <div style="border:1px solid #ddd; border-radius:0px;">
+                            <a id="PanelColorsAddInputField"
+                               class="btn btn-block btn-light rounded-0"
+                               onclick="AddInputFieldStringArray.AddField(this)">Add input field</a>
+                            <table name="PanelColors" class="table table-striped">
+                                @for (var i = 0; i < Model.PanelColors.Count; i++)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input class="form-control"
+                                                       name="PanelColors"
+                                                       type="text"
+                                                       value="@Model.PanelColors[i]">
+                                            </td>
+                                            <td>
+                                                <a class="checkbox btn btn-secondary rounded-0"
+                                                   onclick="AddInputFieldStringArray.RemoveField(this)">
+                                                    &times;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+                            </table>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PanelColors, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Ergonomics" role="tabpanel">
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.VESA_Mount, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.VESA_Mount, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.VESA_Mount, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.VESA_Interface, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.VESA_Interface, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.VESA_Interface, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.RemoveableStand, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.RemoveableStand, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.RemoveableStand, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.HeightAdjustable, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.HeightAdjustable, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.HeightAdjustable, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.HeightAdjustmentRange, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.HeightAdjustmentRange, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">mm</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.HeightAdjustmentRange, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.LandscapePortraitPivot, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.LandscapePortraitPivot, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.LandscapePortraitPivot, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LeftPivot, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.LeftPivot, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">&deg;</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.LeftPivot, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RightPivot, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.RightPivot, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">&deg;</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.RightPivot, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.LeftRightSwivel, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.LeftRightSwivel, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.LeftRightSwivel, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LeftSwivel, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.LeftSwivel, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">&deg;</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.LeftSwivel, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RightSwivel, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.RightSwivel, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">&deg;</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.RightSwivel, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.ForwardBackwardTilt, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.ForwardBackwardTilt, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.ForwardBackwardTilt, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ForwardTilt, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.ForwardTilt, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">&deg;</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ForwardTilt, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BackwardTilt, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.BackwardTilt, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">&deg;</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.BackwardTilt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Audio" role="tabpanel">
+                    <div class="form-group ">
+                        <div class="form-check">
+                            @Html.CheckBoxFor(model => model.Speakers.HasSpeakers, htmlAttributes: new { @class = "form-check-input" })
+                            @Html.LabelFor(model => model.Speakers.HasSpeakers, htmlAttributes: new { @class = "form-check-label" })
+                            @Html.ValidationMessageFor(model => model.Speakers.HasSpeakers, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.LabelFor(model => model.Speakers.Quantity, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Speakers.Quantity, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.Speakers.Quantity, "", new { @class = "text-danger" })
+
+                        @Html.LabelFor(model => model.Speakers.Watts, htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Speakers.Watts, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                            <div class="input-group-append">
+                                <span class="input-group-text">W</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Speakers.Watts, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Camera" role="tabpanel">
+                    <div class="form-group ">
+                        <div class="form-check">
+                            @Html.CheckBoxFor(model => model.Camera.HasCamera, htmlAttributes: new { @class = "form-check-input" })
+                            @Html.LabelFor(model => model.Camera.HasCamera, htmlAttributes: new { @class = "form-check-label" })
+                            @Html.ValidationMessageFor(model => model.Camera.HasCamera, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.LabelFor(model => model.Camera.ImageResolutionPixels, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Camera.ImageResolutionPixels, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.Camera.ImageResolutionPixels, "", new { @class = "text-danger" })
+
+                        @Html.LabelFor(model => model.Camera.ImageResolutionMegaPixels, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Camera.ImageResolutionMegaPixels, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.Camera.ImageResolutionMegaPixels, "", new { @class = "text-danger" })
+
+                        @Html.LabelFor(model => model.Camera.VideoResolutionPixels, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Camera.VideoResolutionPixels, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.Camera.VideoResolutionPixels, "", new { @class = "text-danger" })
+
+                        @Html.LabelFor(model => model.Camera.VideoResolutionMegaPixels, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Camera.VideoResolutionMegaPixels, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.Camera.VideoResolutionMegaPixels, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Connectivity" role="tabpanel">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.VideoPorts, htmlAttributes: new { @class = "control-label " })
+                        <div style="border:1px solid #ddd; border-radius:0px;" class=" ">
+                            <table id="videoPorts" class="table table-striped rounded-0">
+                                <thead>
+                                    <tr>
+                                        <th>Type of video port</th>
+                                        <th>Number of video ports of this type (between 1 and 4)</th>
+                                    </tr>
+                                </thead>
+                                @for (var index = 0; index < Model.VideoPorts.Count(); index++)
+                                {
+                                    <tbody name="VideoPorts[@index]">
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <select onchange="MonitorPortsJs.updateOptions(this)" name="VideoPorts[@index].Type" class="form-control rounded-0">
+
+                                                        @foreach (var port in Model.ViewData.VideoPorts)
+                                                        {
+                                                            if (port == Model.VideoPorts[index].Type)
+                                                            {
+                                                                <option selected value="@port">
+                                                                    @port
+                                                                </option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@port">
+                                                                    @port
+                                                                </option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <input class="form-control rounded-0" type="number" value="@Model.VideoPorts[index].Num" name="VideoPorts[@index].Num" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="hidden" name="VideoPorts[@index].Index" value="@index" />
+                                            </td>
+                                            <td>
+                                                <a name="VideoPorts[@index]" class="checkbox btn btn-secondary rounded-0" onclick="MonitorPortsJs.removeUploadInputField(this)">&times;</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+
+                            </table>
+                            <input id="videoPortButton" onclick="MonitorPortsJs.addPortField('video')" style="margin:10px;" class="btn btn-light rounded-0" type="button" value="Add Port" />
+                            <input id="videoPortResetButton" onclick="MonitorPortsJs.resetPortFields('video')" style="margin:10px;" class="btn btn-secondary rounded-0" type="button" value="Reset" />
+                        </div>
+                        @Html.ValidationMessageFor(model => model.VideoPorts, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.USBPorts, htmlAttributes: new { @class = "control-label " })
+                        <div style="border:1px solid #ddd; border-radius:0px;" class=" ">
+                            <table id="usbPorts" class="table table-striped rounded-0">
+                                <thead>
+                                    <tr>
+                                        <th>Type of usb port</th>
+                                        <th>Number of usb ports of this type (between 1 and 10)</th>
+                                    </tr>
+                                </thead>
+                                @for (var index = 0; index < Model.USBPorts.Count(); index++)
+                                {
+                                    <tbody name="USBPorts[@index]">
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <select onchange="MonitorPortsJs.updateOptions(this)" name="USBPorts[@index].Type" class="form-control rounded-0">
+
+                                                        @foreach (var port in Model.ViewData.USBPorts)
+                                                        {
+                                                            if (port == Model.USBPorts[index].Type)
+                                                            {
+                                                                <option selected value="@port">
+                                                                    @port
+                                                                </option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@port">
+                                                                    @port
+                                                                </option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <input class="form-control rounded-0" type="number" value="@Model.USBPorts[index].Num" name="USBPorts[@index].Num" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="hidden" name="USBPorts[@index].Index" value="@index" />
+                                            </td>
+                                            <td>
+                                                <a name="USBPorts[@index]" class="checkbox btn btn-secondary rounded-0" onclick="MonitorPortsJs.removeUploadInputField(this)">&times;</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+
+                            </table>
+                            <input id="usbPortButton" onclick="MonitorPortsJs.addPortField('usb')" style="margin:10px;" class="btn btn-light rounded-0" type="button" value="Add Port" />
+                            <input id="usbPortResetButton" onclick="MonitorPortsJs.resetPortFields('usb')" style="margin:10px;" class="btn btn-secondary rounded-0" type="button" value="Reset" />
+                        </div>
+                        @Html.ValidationMessageFor(model => model.USBPorts, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.AudioPortIn, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.AudioPortIn, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.AudioPortIn, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.AudioPortOut, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.AudioPortOut, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.AudioPortOut, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.MicrophonePort, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.MicrophonePort, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.MicrophonePort, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.SD_MemoryCardSlot, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.SD_MemoryCardSlot, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.SD_MemoryCardSlot, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check">
+                        @Html.CheckBoxFor(model => model.EthernetRJ45, htmlAttributes: new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.EthernetRJ45, htmlAttributes: new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(model => model.EthernetRJ45, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.Network, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Network, new { htmlAttributes = new { @class = "form-control rounded-0" } })
+                        @Html.ValidationMessageFor(model => model.Network, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Features" role="tabpanel">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Features, htmlAttributes: new { @class = "control-label " })
+                        <div style="border:1px solid #ddd; border-radius:0px;">
+                            <a id="addFeatureInput"
+                               class="btn btn-block btn-light rounded-0"
+                               onclick="AddInputFieldStringArray.AddField(this)">Add input field</a>
+                            <table name="Features" class="table table-striped">
+                                @for (var i = 0; i < Model.Features.Count; i++)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input class="form-control"
+                                                       name="Features"
+                                                       type="text"
+                                                       value="@Model.Features[i]">
+                                            </td>
+                                            <td>
+                                                <a class="checkbox btn btn-secondary rounded-0"
+                                                   onclick="AddInputFieldStringArray.RemoveField(this)">
+                                                    &times;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+                            </table>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Features, "", new { @class = "text-danger" })
+                    </div>                    
+                </div>
+                <div class="tab-pane fade" id="Certificates, standarts and licenses" role="tabpanel">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CertificatesStandartsLicenses, htmlAttributes: new { @class = "control-label " })
+                        <div style="border:1px solid #ddd; border-radius:0px;">
+                            <a id="addCslInput"
+                               class="btn btn-block btn-light rounded-0"
+                               onclick="AddInputFieldStringArray.AddField(this)">Add input field</a>
+                            <table name="CertificatesStandartsLicenses" class="table table-striped">
+                                @for (var i = 0; i < Model.CertificatesStandartsLicenses.Count; i++)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input class="form-control"
+                                                       name="CertificatesStandartsLicenses"
+                                                       type="text"
+                                                       value="@Model.CertificatesStandartsLicenses[i]">
+                                            </td>
+                                            <td>
+                                                <a class="checkbox btn btn-secondary rounded-0"
+                                                   onclick="AddInputFieldStringArray.RemoveField(this)">
+                                                    &times;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+                            </table>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.CertificatesStandartsLicenses, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="UnhandledDisplaySpecificationProperties" role="tabpanel">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UnhandledDisplaySpecificationProperties, htmlAttributes: new { @class = "control-label " })
+                        <div style="border:1px solid #ddd; border-radius:0px;">
+                            <a id="unhandledAddInput"
+                               class="btn btn-block btn-light rounded-0"
+                               onclick="AddInputFieldStringArray.AddField(this)">Add input field</a>
+                            <table name="UnhandledDisplaySpecificationProperties" class="table table-striped">
+                                @for (var i = 0; i < Model.UnhandledDisplaySpecificationProperties.Count; i++)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input class="form-control"
+                                                       name="UnhandledDisplaySpecificationProperties"
+                                                       type="text"
+                                                       value="@Model.UnhandledDisplaySpecificationProperties[i]">
+                                            </td>
+                                            <td>
+                                                <a class="checkbox btn btn-secondary rounded-0"
+                                                   onclick="AddInputFieldStringArray.RemoveField(this)">
+                                                    &times;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+                            </table>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.UnhandledDisplaySpecificationProperties, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

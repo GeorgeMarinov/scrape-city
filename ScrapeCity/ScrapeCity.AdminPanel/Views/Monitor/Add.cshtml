@@ -1,0 +1,56 @@
+﻿@model ScrapeCity.Common.Models.Monitors.ViewModels.MonitorVm
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/MonitorPorts.js")
+    @Scripts.Render("~/Scripts/template7.min.js")
+    @Scripts.Render("~/Scripts/AddInputFieldStringArray.js")
+
+    @*template used by MonitorPorts.js -> adds more video input fields*@
+    <script id="videoPort-data" type="text/template">
+        @foreach (var port in Model.ViewData.VideoPorts)
+        {
+            <br />@port
+        }
+    </script>
+    
+    @*template used by MonitorPorts.js -> adds more usb input fields*@
+    <script id="usbPort-data" type="text/template">
+        @foreach (var port in Model.ViewData.USBPorts)
+        {
+            <br />@port
+        }
+    </script>
+
+    @*used by VideoPorts.js, USBPorts.js -> adjusts global integer based on number of ports the edited model is holding*@
+    <script>
+        $(document).ready(function () {
+            MonitorPortsJs.setGlobalVideoPortInt(@Model.VideoPorts.Count());
+            MonitorPortsJs.setGlobalUSBPortInt(@Model.USBPorts.Count());
+            @if (Model.VideoPorts.Count > 0)
+            {
+                <text>MonitorPortsJs.updateOptions("video")</text>
+            }
+            @if (Model.USBPorts.Count > 0)
+            {
+                <text>MonitorPortsJs.updateOptions("usb")</text>
+            }
+        });
+    </script>
+}
+
+<div class="container">
+
+            @using (Html.BeginForm("Add", "Monitor", FormMethod.Post, new { id = "monitorForm" }))
+            {
+                Html.RenderPartial("MonitorAddEditForm", Model);
+
+                <div class="row offset-3 mt-3">
+                    <div class="form-group">
+                        <input id="submit" type="submit" value="Create" class="btn btn-lg btn-light rounded-0" />
+                        <a href="~/Monitor/Index" class="btn btn-lg btn-secondary rounded-0">Back</a>
+                    </div>
+                </div>
+            }
+
+</div>

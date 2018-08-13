@@ -1,0 +1,73 @@
+﻿@using ScrapeCity.Common.Models.Monitors.ViewModels
+@model IEnumerable<AllMonitorsVm>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/ShowMoreMonitorCards.js")
+}
+
+<div class="container">
+    <div class="row mt-4">
+        <a id="addMonitorButton"
+           href="~/Monitor/Add"
+           class="btn btn-lg btn-secondary rounded-0 m-1">
+            Add a monitor
+        </a>
+        <a href="~/Monitor/UpdateMonitorIndex"
+           class="btn btn-lg btn-secondary rounded-0 m-1">
+            Update monitor index
+        </a>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="d-flex flex-row">
+                <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" role="navigation">
+                    @foreach (var vm in Model)
+                    {
+                        <li class="nav-item">
+                            <a href="#@vm.Brand"
+                               class="nav-link rounded-0"
+                               data-toggle="tab"
+                               role="tab"
+                               aria-controls="@vm.Brand">
+                                @vm.Brand
+                                <span class="badge badge-secondary">
+                                    @vm.MonitorCount
+                                </span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <div class="tab-content col-9">
+                    @foreach (var vm in Model)
+                    {
+                    <div class="tab-pane fade" id="@vm.Brand" role="tabpanel">
+                        <div class="row">
+                            @foreach (var monitor in vm.MonitorListVms)
+                            {
+                                <div class="card mr-1 mb-1" style="max-width:200px">
+                                    <img class="card-img-top" src="@monitor.Thumbnail?width=200&height=200">
+                                    <div class="card-footer">
+                                        <p class="text-center">@monitor.Model</p>
+                                        <a href="~/Monitor/Details/@monitor.Id"
+                                           class="btn btn-secondary rounded-0">Details</a>
+                                        <a href="~/Monitor/Edit/@monitor.Id"
+                                           class="btn btn-secondary rounded-0">Edit</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="row">
+                            <button class="btn btn-block btn-secondary rounded-0"
+                                    name="ShowMoreCardsButton"
+                                    data-brand="@vm.Brand"
+                                    onclick="ShowMoreMonitorCards.GetCards(this)">
+                                SHOW MORE MONITORS
+                            </button>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

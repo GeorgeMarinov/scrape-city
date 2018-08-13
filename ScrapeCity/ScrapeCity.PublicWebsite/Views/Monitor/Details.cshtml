@@ -1,0 +1,1118 @@
+﻿@model ScrapeCity.Common.Models.Monitors.ViewModels.MonitorVm
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/FullScreenImage.js")
+}
+@section Styles {
+    <link href="~/Content/FullScreenImage.css" rel="stylesheet" />
+}
+
+
+<div class="container">
+    <h1 class="text-center">@Model.BrandName @Model.Model Details</h1>
+    <div class="row mt-3">
+        <div class="col-2">
+            @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "control-label " })
+            <img class="img-thumbnail"
+                 width="125"
+                 height="100"
+                 src="@Model.Thumbnail" />
+        </div>
+        <div class="col-10">
+            @Html.LabelFor(model => model.MonitorPictures, htmlAttributes: new { @class = "control-label " })
+            <div class="jumbotron">
+                <article>
+                    @foreach (var picture in Model.MonitorPictures)
+                    {
+                        <img class="img-thumbnail"
+                             width="150"
+                             height="150"
+                             src="@Url.Content(@picture.Uri)?width=150&height=150" />
+                    }
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex flex-row">
+                <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" role="navigation">
+                    <li class="nav-item">
+                        <a href="#Brand, model" class="nav-link active rounded-0" data-toggle="tab" role="tab" aria-controls="Brand, model">Brand, model</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Display" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Display">Display</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Frequencies" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Frequencies">Frequencies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Power consumption" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Power consumption">Power consumption</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Dimensions, weight and color" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Dimensions, weight and color">Dimensions, weight and color</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Ergonomics" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Ergonomics">Ergonomics</a>
+                    </li>
+                    @if (Model.Speakers.HasSpeakers)
+                    {
+                        <li class="nav-item">
+                            <a href="#Audio" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Audio">Audio</a>
+                        </li>
+                    }
+                    @if (Model.Camera.HasCamera)
+                    {
+                        <li class="nav-item">
+                            <a href="#Camera" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Camera">Camera</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a href="#Connectivity" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Connectivity">Connectivity</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Features" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Certificates, standarts and licenses" class="nav-link rounded-0" data-toggle="tab" role="tab" aria-controls="Certificates, standarts and licenses">Certificates, standarts and licenses</a>
+                    </li>
+                </ul>
+                <div class="tab-content col-6">
+                    <div class="tab-pane fade show active" id="Brand, model" role="tabpanel">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.BrandName)
+                                    </td>
+                                    <td>
+                                        @Model.BrandName
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.Model)
+                                    </td>
+                                    <td>
+                                        @Model.Model
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="Display" role="tabpanel">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.ScreenSize)
+                                    </td>
+                                    <td>
+                                        @Model.ScreenSize
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.ScreenDiagonal)
+                                    </td>
+                                    <td>
+                                        @Model.ScreenDiagonal
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.ScreenWidth)
+                                    </td>
+                                    <td>
+                                        @Model.ScreenWidth
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.ScreenHeight)
+                                    </td>
+                                    <td>
+                                        @Model.ScreenHeight
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.HasCurvedPanel)
+                                    </td>
+                                    <td>
+                                        @Model.HasCurvedPanel
+                                    </td>
+                                </tr>
+                                @if (Model.RadiusOfCurvature > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.RadiusOfCurvature)
+                                        </td>
+                                        <td>
+                                            @Model.RadiusOfCurvature
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.PanelType)
+                                    </td>
+                                    <td>
+                                        @Model.PanelType
+                                    </td>
+                                </tr>
+                                @if (Model.PanelBitDepth > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.PanelBitDepth)
+                                        </td>
+                                        <td>
+                                            @Model.PanelBitDepth
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.FRC)
+                                    </td>
+                                    <td>
+                                        @Model.FRC
+                                    </td>
+                                </tr>
+                                @if (Model.LUT > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.LUT)
+                                        </td>
+                                        <td>
+                                            @Model.LUT
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.ColorDepth > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.ColorDepth)
+                                        </td>
+                                        <td>
+                                            @Model.ColorDepth
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.AspectRatio > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.AspectRatio)
+                                        </td>
+                                        <td>
+                                            @Model.AspectRatio : 1
+                                        </td>
+                                    </tr>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.AspectRatioCommon) || !string.IsNullOrWhiteSpace(Model.AspectRatioCommon))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.AspectRatioCommon)
+                                        </td>
+                                        <td>
+                                            @Model.AspectRatioCommon
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.MaxHorizontalPixels)
+                                    </td>
+                                    <td>
+                                        @Model.MaxHorizontalPixels
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.MaxVerticalPixels)
+                                    </td>
+                                    <td>
+                                        @Model.MaxVerticalPixels
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.PixelPitch)
+                                    </td>
+                                    <td>
+                                        @Model.PixelPitch
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.PPI)
+                                    </td>
+                                    <td>
+                                        @Model.PPI
+                                    </td>
+                                </tr>
+                                @if (Model.DisplayArea > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.DisplayArea)
+                                        </td>
+                                        <td>
+                                            @Model.DisplayArea
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.BacklightType)
+                                    </td>
+                                    <td>
+                                        @Model.BacklightType
+                                    </td>
+                                </tr>
+                                @if (Model.NTSC > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.NTSC)
+                                        </td>
+                                        <td>
+                                            @Model.NTSC
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.sRGB > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.sRGB)
+                                        </td>
+                                        <td>
+                                            @Model.sRGB
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.DCI_P3 > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.DCI_P3)
+                                        </td>
+                                        <td>
+                                            @Model.DCI_P3
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Rec2020 > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Rec2020)
+                                        </td>
+                                        <td>
+                                            @Model.Rec2020
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.Brightness)
+                                    </td>
+                                    <td>
+                                        @Model.Brightness
+                                    </td>
+                                </tr>
+                                @if (Model.PeakBrightness > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.PeakBrightness)
+                                        </td>
+                                        <td>
+                                            @Model.PeakBrightness
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.StaticContrast > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.StaticContrast)
+                                        </td>
+                                        <td>
+                                            @Model.StaticContrast : 1
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.DynamicContrast > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.DynamicContrast)
+                                        </td>
+                                        <td>
+                                            @Model.DynamicContrast : 1
+                                        </td>
+                                    </tr>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.HDR) || !string.IsNullOrWhiteSpace(Model.HDR))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.HDR)
+                                        </td>
+                                        <td>
+                                            @Model.HDR
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.HorizontalViewingAngle > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.HorizontalViewingAngle)
+                                        </td>
+                                        <td>
+                                            @Model.HorizontalViewingAngle
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.VerticalViewingAngle > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.VerticalViewingAngle)
+                                        </td>
+                                        <td>
+                                            @Model.VerticalViewingAngle
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.MinimumResponceTime > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.MinimumResponceTime)
+                                        </td>
+                                        <td>
+                                            @Model.MinimumResponceTime
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.AverageResponceTime > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.AverageResponceTime)
+                                        </td>
+                                        <td>
+                                            @Model.AverageResponceTime
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.MaximumResponceTime > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.MaximumResponceTime)
+                                        </td>
+                                        <td>
+                                            @Model.MaximumResponceTime
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.InputLag > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.InputLag)
+                                        </td>
+                                        <td>
+                                            @Model.InputLag
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.ScreenType)
+                                    </td>
+                                    <td>
+                                        @Model.ScreenType
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.DisplaySyncType)
+                                    </td>
+                                    <td>
+                                        @Model.DisplaySyncType
+                                    </td>
+                                </tr>
+                                @if (Model.CIE1976 > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.CIE1976)
+                                        </td>
+                                        <td>
+                                            @Model.CIE1976
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.CIE1931 > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.CIE1931)
+                                        </td>
+                                        <td>
+                                            @Model.CIE1931
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.REC709 > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.REC709)
+                                        </td>
+                                        <td>
+                                            @Model.REC709
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.ThreeD)
+                                    </td>
+                                    <td>
+                                        @Model.ThreeD
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="Frequencies" role="tabpanel">
+                        <table class="table">
+                            <tbody>
+                                @if (Model.MinHorizontalFrequency > 0 && Model.MaxHorizontalFrequency > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.MinHorizontalFrequency)
+                                        </td>
+                                        <td>
+                                            @Model.MinHorizontalFrequency - @Model.MinHorizontalFrequency
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.VerticalFrequency > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.VerticalFrequency)
+                                        </td>
+                                        <td>
+                                            @Model.VerticalFrequency
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Minimum110V > 0 && Model.Maximum110V > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Minimum110V)
+                                        </td>
+                                        <td>
+                                            @Model.Minimum110V - @Model.Maximum110V
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Minimum220V > 0 && Model.Maximum220V > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Minimum220V)
+                                        </td>
+                                        <td>
+                                            @Model.Minimum220V - @Model.Maximum220V
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.AlternatingCurrentFrequencyMin > 0 && Model.AlternatingCurrentFrequencyMax > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.AlternatingCurrentFrequencyMin)
+                                        </td>
+                                        <td>
+                                            @Model.AlternatingCurrentFrequencyMin - @Model.AlternatingCurrentFrequencyMax
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="Power consumption" role="tabpanel">
+                        <table class="table">
+                            <tbody>
+                                @if (Model.PowerConsumptionOff > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.PowerConsumptionOff)
+                                        </td>
+                                        <td>
+                                            @Model.PowerConsumptionOff
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.PowerConsumptionSleep > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.PowerConsumptionSleep)
+                                        </td>
+                                        <td>
+                                            @Model.PowerConsumptionSleep
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.PowerConsumptionAverage > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.PowerConsumptionAverage)
+                                        </td>
+                                        <td>
+                                            @Model.PowerConsumptionAverage
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.PowerConsumptionEco > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.PowerConsumptionEco)
+                                        </td>
+                                        <td>
+                                            @Model.PowerConsumptionEco
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.PowerConsumptionMaximum > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.PowerConsumptionMaximum)
+                                        </td>
+                                        <td>
+                                            @Model.PowerConsumptionMaximum
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Amperage > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Amperage)
+                                        </td>
+                                        <td>
+                                            @Model.Amperage
+                                        </td>
+                                    </tr>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.EnergyEfficiencyClass) || !string.IsNullOrWhiteSpace(Model.EnergyEfficiencyClass))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.EnergyEfficiencyClass)
+                                        </td>
+                                        <td>
+                                            @Model.EnergyEfficiencyClass
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="Dimensions, weight and color" role="tabpanel">
+                        <table class="table">
+                            <tbody>
+                                @if (Model.Width > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Width)
+                                        </td>
+                                        <td>
+                                            @Model.Width
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Height > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Height)
+                                        </td>
+                                        <td>
+                                            @Model.Height
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Depth > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Depth)
+                                        </td>
+                                        <td>
+                                            @Model.Depth
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Weight > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Weight)
+                                        </td>
+                                        <td>
+                                            @Model.Weight
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.WidthWithStand > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.WidthWithStand)
+                                        </td>
+                                        <td>
+                                            @Model.WidthWithStand
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.HeightWithStand > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.HeightWithStand)
+                                        </td>
+                                        <td>
+                                            @Model.HeightWithStand
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.DepthWithStand > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.DepthWithStand)
+                                        </td>
+                                        <td>
+                                            @Model.DepthWithStand
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.WeightWithStand > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.WeightWithStand)
+                                        </td>
+                                        <td>
+                                            @Model.WeightWithStand
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.PanelColors.Count > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.PanelColors)
+                                        </td>
+                                        <td>
+                                            @foreach (var colors in Model.PanelColors)
+                                            {
+                                                <p>@colors</p>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="Ergonomics" role="tabpanel">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.VESA_Mount)
+                                    </td>
+                                    <td>
+                                        @Model.VESA_Mount
+                                    </td>
+                                </tr>
+                                @if (Model.VESA_Interface > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.VESA_Interface)
+                                        </td>
+                                        <td>
+                                            @Model.VESA_Interface x @Model.VESA_Interface
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.RemoveableStand)
+                                    </td>
+                                    <td>
+                                        @Model.RemoveableStand
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.HeightAdjustable)
+                                    </td>
+                                    <td>
+                                        @Model.HeightAdjustable
+                                    </td>
+                                </tr>
+                                @if (Model.HeightAdjustmentRange > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.HeightAdjustmentRange)
+                                        </td>
+                                        <td>
+                                            @Model.HeightAdjustmentRange
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.LandscapePortraitPivot)
+                                    </td>
+                                    <td>
+                                        @Model.LandscapePortraitPivot
+                                    </td>
+                                </tr>
+                                @if (Model.LeftPivot > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.LeftPivot)
+                                        </td>
+                                        <td>
+                                            @Model.LeftPivot
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.RightPivot > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.RightPivot)
+                                        </td>
+                                        <td>
+                                            @Model.RightPivot
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.LeftRightSwivel)
+                                    </td>
+                                    <td>
+                                        @Model.LeftRightSwivel
+                                    </td>
+                                </tr>
+                                @if (Model.LeftSwivel > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.LeftSwivel)
+                                        </td>
+                                        <td>
+                                            @Model.LeftSwivel
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.RightSwivel > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.RightSwivel)
+                                        </td>
+                                        <td>
+                                            @Model.RightSwivel
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.ForwardBackwardTilt)
+                                    </td>
+                                    <td>
+                                        @Model.ForwardBackwardTilt
+                                    </td>
+                                </tr>
+                                @if (Model.ForwardTilt > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.ForwardTilt)
+                                        </td>
+                                        <td>
+                                            @Model.ForwardTilt
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.BackwardTilt > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.BackwardTilt)
+                                        </td>
+                                        <td>
+                                            @Model.BackwardTilt
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    @if (Model.Speakers.HasSpeakers)
+                    {
+                        <div class="tab-pane fade" id="Audio" role="tabpanel">
+                            @Html.LabelFor(model => model.Speakers)
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Speakers.Quantity)
+                                        </td>
+                                        <td>
+                                            @Model.Speakers.Quantity
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Speakers.Watts)
+                                        </td>
+                                        <td>
+                                            @Model.Speakers.Watts
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    @if (Model.Camera.HasCamera)
+                    {
+                        <div class="tab-pane fade" id="Camera" role="tabpanel">
+                            @Html.LabelFor(model => model.Camera)
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Camera.ImageResolutionPixels)
+                                        </td>
+                                        <td>
+                                            @Model.Camera.ImageResolutionPixels
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Camera.ImageResolutionMegaPixels)
+                                        </td>
+                                        <td>
+                                            @Model.Camera.ImageResolutionMegaPixels
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Camera.VideoResolutionPixels)
+                                        </td>
+                                        <td>
+                                            @Model.Camera.VideoResolutionPixels
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Camera.VideoResolutionMegaPixels)
+                                        </td>
+                                        <td>
+                                            @Model.Camera.VideoResolutionMegaPixels
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    <div class="tab-pane fade" id="Connectivity" role="tabpanel">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.VideoPorts)
+                                    </td>
+                                </tr>
+                                @foreach (var videoPort in Model.VideoPorts)
+                                {
+                                    <tr>
+                                        <td>
+                                            @videoPort.Type
+                                        </td>
+                                        <td>
+                                            x @videoPort.Num
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.USBPorts.Count > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.USBPorts)
+                                        </td>
+                                    </tr>
+                                    foreach (var USB_Port in Model.USBPorts)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @USB_Port.Type
+                                            </td>
+                                            <td>
+                                                x @USB_Port.Num
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                @if (!string.IsNullOrEmpty(Model.AudioPortIn) || !string.IsNullOrWhiteSpace(Model.AudioPortIn))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.AudioPortIn)
+                                        </td>
+                                        <td>
+                                            @Model.AudioPortIn
+                                        </td>
+                                    </tr>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.AudioPortOut) || !string.IsNullOrWhiteSpace(Model.AudioPortOut))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.AudioPortOut)
+                                        </td>
+                                        <td>
+                                            @Model.AudioPortOut
+                                        </td>
+                                    </tr>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.MicrophonePort) || !string.IsNullOrWhiteSpace(Model.MicrophonePort))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.MicrophonePort)
+                                        </td>
+                                        <td>
+                                            @Model.MicrophonePort
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.SD_MemoryCardSlot)
+                                    </td>
+                                    <td>
+                                        @Model.SD_MemoryCardSlot
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.EthernetRJ45)
+                                    </td>
+                                    <td>
+                                        @Model.EthernetRJ45
+                                    </td>
+                                </tr>
+                                @if (!string.IsNullOrEmpty(Model.Network) || !string.IsNullOrWhiteSpace(Model.Network))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.LabelFor(x => x.Network)
+                                        </td>
+                                        <td>
+                                            @Model.Network
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="Features" role="tabpanel">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.Features) :
+                                    </td>
+                                </tr>
+                                @foreach (var feature in Model.Features)
+                                {
+                                    <tr>
+                                        <td>
+                                            @feature
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="Certificates, standarts and licenses" role="tabpanel">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(x => x.CertificatesStandartsLicenses) :
+                                    </td>
+                                </tr>
+                                @foreach (var csl in Model.CertificatesStandartsLicenses)
+                                {
+                                    <tr>
+                                        <td>
+                                            @csl
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="offset-3">
+            <a href="~/Monitor/Edit/@Model.Id"
+               class="btn btn-light btn-lg rounded-0">
+                Edit
+            </a>
+            <a href="~/Monitor/Index"
+               class="btn btn-secondary btn-lg rounded-0">
+                Back
+            </a>
+        </div>
+    </div>
+</div>
